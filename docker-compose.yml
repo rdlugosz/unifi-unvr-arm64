@@ -1,17 +1,26 @@
 version: '3'
 services:
   unifi-protect:
-    container_name: unifi-unvr
+    container_name: unifi-unvr-rd
     privileged: true
     tmpfs:
       - '/run'
       - '/run/lock'
       - '/tmp'
     volumes:
-      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      - '/storage/srv:/srv'
-      - '/storage/data:/data'
-      - '/storage/persistent:/persistent'
+      - unvr-srv:/srv
+      - unvr-data:/data
+      - unvr-persistent:/persistent
     network_mode: 'host'
     restart: unless-stopped
-    image: 'snowsnoot/unifi-unvr:latest'
+    # image: arm64v8/debian:latest
+    image: 'rdlugosz/unifi-protect-arm64'
+
+volumes:
+    unvr-srv:
+      external: true
+    unvr-data:
+      external: true
+    unvr-persistent:
+      external: true
+

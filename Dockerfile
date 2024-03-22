@@ -1,6 +1,6 @@
-FROM arm64v8/debian:11-slim
+FROM arm64v8/debian:latest
 
-ARG DEBIAN_FRONTEND=noninteractive
+# ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
  && apt-get -y install --no-install-recommends \
@@ -51,5 +51,5 @@ COPY static_files/sbin /sbin/
 
 VOLUME ["/srv", "/data", "/persistent"]
 
-CMD ["/lib/systemd/systemd"]
+CMD ["/systemd/systemd"]
 
